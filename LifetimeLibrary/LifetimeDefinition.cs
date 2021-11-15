@@ -43,6 +43,35 @@ namespace LifetimeUtility
         {
         }
 
+        /// <summary>
+        /// Created definition nested into <paramref name="parent"/>, i.e. this definition is attached to parent as termination resource.  
+        ///
+        /// <para>
+        /// <see cref="parent"/>'s termination (via <see cref="Terminate"/> method) will instantly propagate <c>Canceling</c> signal
+        /// to all descendants, i.e all statuses of parent's children, children's children, ... will become <see cref="LifetimeStatus.Canceling"/>
+        /// instantly. And then resources destructure will begin from the most recently connected children to the last (stack's like LIFO way).
+        /// </para>
+        /// </summary>
+        ///
+        /// <param name="parent"></param>
+        public LifetimeDefinition(OuterLifetime parent) : this()
+        {
+            parent.LifetimeDefinition.Attach(this);
+        }
+
+        internal void Attach(LifetimeDefinition child)
+        {
+            if (child == null) throw new ArgumentNullException(nameof(child));
+
+            //can't attach eternal lifetime
+            if (child.IsEternal || child.IsTerminated)
+            {
+                return;
+            }
+
+            Add(child.Dispose);
+        }
+
 
         internal void Add(Action action)
         {
