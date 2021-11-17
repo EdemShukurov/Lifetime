@@ -13,6 +13,11 @@
         public bool IsTerminated => _lifetime.IsTerminated;
 
         internal LifetimeDefinition LifetimeDefinition => _lifetime.Definition;
+
+        /// <summary>
+        /// Outer lifetime.
+        /// </summary>
+        public Lifetime Lifetime => _lifetime;
         
         private OuterLifetime(Lifetime lifetime)
         {

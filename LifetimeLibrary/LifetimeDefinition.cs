@@ -11,7 +11,7 @@
     public class LifetimeDefinition : IDisposable
     {
         //internal static readonly LifetimeDefinition Terminated = new LifetimeDefinition(new Lifetime();
-        internal static readonly LifetimeDefinition Eternal = new LifetimeDefinition();
+        public static readonly LifetimeDefinition Eternal = new LifetimeDefinition();
         
         /// <summary>
         /// Underlying lifetime for this definition.

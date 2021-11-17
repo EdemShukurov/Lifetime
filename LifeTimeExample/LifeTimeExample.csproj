@@ -10,6 +10,10 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\LifetimeLibrary\LifetimeLibrary.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
       <Reference Include="LifetimeLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
         <HintPath>..\LifetimeLibrary\bin\Debug\net5.0\LifetimeLibrary.dll</HintPath>
       </Reference>

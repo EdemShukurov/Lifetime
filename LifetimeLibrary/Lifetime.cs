@@ -24,8 +24,13 @@ namespace LifetimeUtility
 
         private readonly LifetimeDefinition _myDefinition;
         
-        internal LifetimeDefinition Definition => _myDefinition ?? LifetimeDefinition.Eternal;   
-    
+        internal LifetimeDefinition Definition => _myDefinition ?? LifetimeDefinition.Eternal;
+
+        /// <summary>
+        /// The whole lifetime, it lives forever.
+        /// </summary>
+        public static Lifetime Eternal = LifetimeDefinition.Eternal.Lifetime;
+
         //ctor
         internal Lifetime(LifetimeDefinition definition)
         {
@@ -119,17 +124,6 @@ namespace LifetimeUtility
 
         #endregion
         
-        // /// <summary>
-        // /// Singleton lifetime that is in <see cref="LifetimeStatus.Terminated"/> state by default.  
-        // /// </summary>
-        // public static Lifetime Terminated => LifetimeDefinition.Terminated.Lifetime;
-        
-        /// <summary>
-        /// The whole lifetime, it lives forever.
-        /// </summary>
-        public static Lifetime Eternal = LifetimeDefinition.Eternal.Lifetime;
-
-
         /// <summary>
         /// Create lifetime definition, that depends on the another lifetime.
         /// </summary>
@@ -140,7 +134,7 @@ namespace LifetimeUtility
             var lifetimeDefinition = new LifetimeDefinition(parent);
             return lifetimeDefinition;
         }
-       
+
         // /// <summary>
         // /// Creates new instance of Lifetime which terminates only when last
         // /// dependent lifetime is terminated
@@ -174,7 +168,7 @@ namespace LifetimeUtility
         //
         //     return definition.Lifetime;
         // }
-      
+
         // /// <summary>
         // /// Creates new instance of Lifetime which terminates only when last
         // /// dependent lifetime is terminated

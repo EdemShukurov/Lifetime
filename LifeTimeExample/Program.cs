@@ -1,4 +1,3 @@
-using System;
 using LifetimeUtility;
 
 namespace LifetimeExample // Note: actual namespace depends on the project name.
@@ -8,7 +7,7 @@ namespace LifetimeExample // Note: actual namespace depends on the project name.
         public static void Main(string[] args)
         {
             DataSource dataSource;
-            using (var appLifeTime = Lifetime.Define())
+            using (var appLifeTime = LifetimeDefinition.Eternal)
             {
                 dataSource = new DataSource(appLifeTime.Lifetime);
                 dataSource.X.OnPropertyChanged += ShowValue;
