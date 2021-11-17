@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading;
-
-namespace LifetimeUtility
+﻿namespace LifetimeUtility
 {
     /// <summary>
     /// Controller for <see cref="Lifetime"/> like <see cref="CancellationTokenSource"/> is a controller fot <see cref="CancellationToken"/>.
@@ -39,7 +35,7 @@ namespace LifetimeUtility
         /// <summary>
         /// Creates toplevel lifetime definition with no parent. LifeTime will always be alive.
         /// </summary>
-        public LifetimeDefinition()
+        private LifetimeDefinition()
         {
         }
 

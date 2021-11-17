@@ -127,12 +127,8 @@ namespace LifetimeUtility
         /// <summary>
         /// The whole lifetime, it lives forever.
         /// </summary>
-        public static Lifetime Eternal = Define().Lifetime;
+        public static Lifetime Eternal = LifetimeDefinition.Eternal.Lifetime;
 
-        public static LifetimeDefinition Define()
-        {
-            return new LifetimeDefinition();
-        }
 
         /// <summary>
         /// Create lifetime definition, that depends on the another lifetime.
@@ -141,25 +137,10 @@ namespace LifetimeUtility
         /// <returns></returns>
         public static LifetimeDefinition DefineDependant(OuterLifetime parent)
         {
-            var lifetimeDefinition = new LifetimeDefinition();
-            parent.LifetimeDefinition.Add(() => lifetimeDefinition.Terminate());
-            
+            var lifetimeDefinition = new LifetimeDefinition(parent);
             return lifetimeDefinition;
         }
-        
-        /// <summary>
-        ///   <para>Scopes your code in <paramref name="action" /> with a lifetime that is terminated automatically when <paramref name="action" /> completes execution, or when its execution is aborted by an exception.</para>
-        ///   <para>Analogous to the <c>using</c> statement of the C# language on everything that is added to the lifetime.</para>
-        /// </summary>
-        /// <param name="action">The code to execute with a temporary lifetime.</param>
-        public static void Using(Action<Lifetime> action)
-        {
-            if (action == null) throw new ArgumentNullException(nameof(action));
-      
-            using (var def = new LifetimeDefinition())
-                action(def.Lifetime);
-        }
-
+       
         // /// <summary>
         // /// Creates new instance of Lifetime which terminates only when last
         // /// dependent lifetime is terminated
